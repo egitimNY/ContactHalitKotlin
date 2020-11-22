@@ -1,14 +1,19 @@
 package com.halit.contacthalitkotlin
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_record_detail.*
 import java.util.*
 
 class RecordDetailActivity : AppCompatActivity() {
+
+    private val REQUEST_PHONE_CALL: Int= 1
 
     // actionBar
     private var actionBar: ActionBar?=null
@@ -17,6 +22,7 @@ class RecordDetailActivity : AppCompatActivity() {
     private var dbHelper:MyDbHelper?=null
 
     private  var recordId:String? = null
+    private var number: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,9 +87,7 @@ class RecordDetailActivity : AppCompatActivity() {
                 updatedDateTv.text = timeUpdated
 
                 main_item_contact.setOnClickListener {
-                    val intent =
-                        Intent(Intent.ACTION_CALL, Uri.parse("tel:$phone"))
-                    startActivity(intent)
+                    makeACall(phone)
                 }
 
                 // if user dosn't attach image then imageUri will be null, so set default image in that case
@@ -101,8 +105,39 @@ class RecordDetailActivity : AppCompatActivity() {
         db.close()
     }
 
+    private fun makeACall(number: String) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            this@RecordDetailActivity.number = number
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE),REQUEST_PHONE_CALL)
+        } else{
+            startCall(number)
+        }
+    }
+
+    private fun startCall(number: String) {
+        val intent =
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:$number"))
+        startActivity(intent)
+
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return super.onSupportNavigateUp()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == REQUEST_PHONE_CALL){
+            if(permissions[0]== Manifest.permission.CALL_PHONE){
+                if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    startCall(number)
+                }
+            }
+        }
     }
 }
