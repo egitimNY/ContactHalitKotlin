@@ -1,15 +1,21 @@
 package com.halit.contacthalitkotlin
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val REQUEST_PHONE_CALL: Int= 1
 
     // dbHelper
     lateinit var dbHelper: MyDbHelper
@@ -21,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val TITLE_DESC = "${Constants.C_NAME} DESC"
 
     private var recentSortOrder = NEWEST_FIRST
+    private var number: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,15 +48,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadRecords(orderBy:String) {
         recentSortOrder = orderBy
-        val adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy))
+        val adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy)){
+            makeACall(it)
+        }
 
         recordRv.adapter = adapterRecord
     }
 
     private fun searchRecords(query:String) {
-        val adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query))
+        val adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query)){
+            makeACall(it)
+        }
 
         recordRv.adapter = adapterRecord
+    }
+
+    private fun makeACall(number: String) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            this@MainActivity.number = number
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE),REQUEST_PHONE_CALL)
+        } else{
+            startCall(number)
+        }
+    }
+
+    private fun startCall(number: String) {
+        val intent =
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:$number"))
+        startActivity(intent)
+
     }
 
     private fun sortDialog() {
@@ -125,6 +152,21 @@ class MainActivity : AppCompatActivity() {
             onResume()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if(requestCode == REQUEST_PHONE_CALL){
+            if(permissions[0]== Manifest.permission.CALL_PHONE){
+                if(grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    startCall(number)
+                }
+            }
+        }
     }
 
 }

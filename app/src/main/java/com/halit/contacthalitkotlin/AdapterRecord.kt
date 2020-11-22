@@ -13,7 +13,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 // Adapter class for recyclerView
-class AdapterRecord(): RecyclerView.Adapter<AdapterRecord.HolderRecord>(){
+class AdapterRecord(val makeACall: (number: String) -> Unit): RecyclerView.Adapter<AdapterRecord.HolderRecord>(){
 
     private var context:Context?=null
     private var recordList:ArrayList<ModelRecord>?=null
@@ -21,7 +21,7 @@ class AdapterRecord(): RecyclerView.Adapter<AdapterRecord.HolderRecord>(){
     lateinit var dbHelper:MyDbHelper
 
 
-    constructor(context: Context?, recordList: ArrayList<ModelRecord>?) : this() {
+    constructor(context: Context?, recordList: ArrayList<ModelRecord>?, makeACall: (number: String) -> Unit) : this(makeACall) {
         this.context = context
         this.recordList = recordList
 
@@ -61,7 +61,7 @@ class AdapterRecord(): RecyclerView.Adapter<AdapterRecord.HolderRecord>(){
         holder.phoneTv.text = phone
         holder.emailTv.text = email
         holder.dobTv.text = dob
-        // if user dosn't attach image then imageUri will be null, so set default image in that case
+        // if user doesn't attach image then imageUri will be null, so set default image in that case
         if (image == "null"){
             // no image in record, set default
             holder.profileIv.setImageResource(R.drawable.ic_person_black)
@@ -77,14 +77,10 @@ class AdapterRecord(): RecyclerView.Adapter<AdapterRecord.HolderRecord>(){
             intent.putExtra("RECORD_ID", id)
             context!!.startActivity(intent)
 
-
         }
 
-
         holder.main_item_contact.setOnClickListener {
-            val intent =
-                Intent(Intent.ACTION_CALL, Uri.parse("tel:${model.phone}"))
-            context?.startActivity(intent)
+            makeACall(model.phone)
         }
 
         // handle more button click: show delete/edit options
