@@ -66,7 +66,7 @@ class AdapterRecord(val makeACall: (number: String) -> Unit): RecyclerView.Adapt
         holder.phoneTv.text = phone
         holder.emailTv.text = email
         holder.dobTv.text = dob
-        // if user doesn't attach image then imageUri will be null, so set default image in that case
+        // if user dosn't attach image then imageUri will be null, so set default image in that case
         if (image == "null"){
             // no image in record, set default
             holder.profileIv.setImageResource(R.drawable.ic_person_black)
