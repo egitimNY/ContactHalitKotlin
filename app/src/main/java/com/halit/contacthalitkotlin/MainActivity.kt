@@ -2,6 +2,7 @@ package com.halit.contacthalitkotlin
 
 import android.Manifest
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -27,6 +28,9 @@ class MainActivity : AppCompatActivity() {
     private val TITLE_DESC = "${Constants.C_NAME} DESC"
 
     private var recentSortOrder = NEWEST_FIRST
+    //reference variable of adapter to display a list of values in the recycler view
+    lateinit var  adapterRecord:AdapterRecord
+    //A variable to hold the phone number until user grants the permission to make a call
     private var number: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -148,8 +152,20 @@ class MainActivity : AppCompatActivity() {
         }
         else if (id==R.id.action_deleteAll){
             // Delete all records
-            dbHelper.deleteAllRecords()
-            onResume()
+            val alertDialog = AlertDialog.Builder(this).setTitle("Delete All").setMessage("Do you want to delete All")
+                .setPositiveButton("Ok",object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        dbHelper.deleteAllRecords()
+                        adapterRecord.clearRecords()
+                    }
+                })
+                .setNegativeButton("Cancel", object: DialogInterface.OnClickListener{
+                    override fun onClick(dialog: DialogInterface?, which: Int) {
+                        dialog?.dismiss()
+                    }
+                })
+                .create()
+            alertDialog.show()
         }
         return super.onOptionsItemSelected(item)
     }
