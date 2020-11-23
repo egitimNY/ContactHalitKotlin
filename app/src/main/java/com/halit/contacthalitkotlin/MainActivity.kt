@@ -58,16 +58,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadRecords(orderBy:String) {
         recentSortOrder = orderBy
-        adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy)) {
-            makeACall(it)
+        adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy)) {number ->
+            makeACall(number)
         }
 
         recordRv.adapter = adapterRecord
     }
 
     private fun searchRecords(query:String) {
-        adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query)) {
-            makeACall(it)
+        adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query)) {number ->
+            makeACall(number)
         }
 
         recordRv.adapter = adapterRecord
