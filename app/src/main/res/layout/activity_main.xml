@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@color/backgroundFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recordRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/row_record"
-        android:paddingBottom="80dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 

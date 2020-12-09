@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/backgroundFragment"
     tools:context=".AddUpdateRecordActivity">
 
     <com.blogspot.atifsoftwares.circularimageview.CircularImageView
@@ -13,8 +14,9 @@
         android:layout_width="140dp"
         android:layout_height="140dp"
         app:c_border="true"
-        app:c_border_width="1dp"
-        app:c_border_color="@color/colorGray"
+        app:c_background_color="@color/backgroundFragment"
+        app:c_border_width="2dp"
+        app:c_border_color="@color/shapeRectangle"
         android:src="@drawable/ic_camera_black"/>
 
     <EditText
@@ -23,10 +25,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="14dp"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:textColor="@color/colorWhite"
         android:inputType="textPersonName|textCapWords"
         android:layout_below="@id/profileIv"
         android:hint="Name"
+        android:textColorHint="@color/colorWhite"
         android:background="@drawable/shape_rectangle"
         android:padding="10dp"/>
 
@@ -36,10 +41,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:layout_marginTop="4dp"
         android:inputType="phone"
         android:layout_below="@id/nameEt"
         android:hint="Phone"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:background="@drawable/shape_rectangle"
         android:padding="10dp"/>
 
@@ -47,12 +55,15 @@
         android:id="@+id/emailEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="4dp"
         android:inputType="textEmailAddress"
         android:layout_below="@id/phoneEt"
         android:hint="Email"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:background="@drawable/shape_rectangle"
         android:padding="10dp"/>
 
@@ -60,11 +71,14 @@
         android:id="@+id/dobEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/shape_rectangle"
         android:padding="10dp"
+        android:textColorHint="@color/colorWhite"
+        android:textColor="@color/colorWhite"
         android:layout_below="@id/emailEt"
         android:hint="DOB dd/mm/yyyy"/>
 
@@ -72,6 +86,7 @@
         android:id="@+id/biolEt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textCursorDrawable="@drawable/color_cursor"
         android:layout_marginStart="15dp"
         android:layout_marginEnd="15dp"
         android:layout_marginTop="4dp"
@@ -81,6 +96,8 @@
         android:gravity="start"
         android:background="@drawable/shape_rectangle"
         android:padding="5dp"
+        android:textColor="@color/colorWhite"
+        android:textColorHint="@color/colorWhite"
         android:hint="Short description"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="1dp"
+    app:cardElevation="3dp"
     app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="@color/colorWhite">
+    app:cardBackgroundColor="@color/backgroundFragment">
 
     <RelativeLayout
         android:id="@+id/oldumu"
@@ -18,17 +18,20 @@
             android:id="@+id/profileIv"
             android:layout_width="70dp"
             android:layout_height="70dp"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             app:c_border="true"
-            app:c_border_width="1dp"
-            app:c_border_color="@color/colorGray"
+            app:c_border_width="1.5dp"
+            app:c_border_color="@color/shapeRectangle"
+            app:c_background_color="@color/backgroundFragment"
             android:src="@drawable/ic_person_black"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/profileIv"
             android:layout_toStartOf="@id/main_item_contact"
             android:orientation="vertical"
@@ -40,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="18sp"/>
             <!--TextView: User Phone-->
             <TextView
@@ -48,24 +51,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Phone"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="18sp"/>
             <!--TextView: User Email-->
-            <TextView
+      <!--      <TextView
                 android:id="@+id/emailTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"/>
+                android:textSize="18sp"/>-->
             <!--TextView: User DOB-->
-            <TextView
+        <!--    <TextView
                 android:id="@+id/dobTv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Dob"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp"/>
+                android:textSize="18sp"/>-->
 
 
         </LinearLayout>
@@ -76,19 +79,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginRight="10dp"
             android:src="@drawable/ic_more_black"
-            android:background="@color/colorWhite"
+            android:background="@color/backgroundFragment"
             android:layout_alignParentRight="true"/>
 
         <ImageView
             android:id="@+id/main_item_contact"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="41dp"
             android:src="@drawable/ic_call"
-            android:background="@color/colorWhite"
+            android:background="@color/backgroundFragment"
             android:layout_alignParentRight="true" />
 
     </RelativeLayout>

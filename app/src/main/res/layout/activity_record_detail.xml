@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
+    android:background="@color/backgroundFragment"
     tools:context=".RecordDetailActivity">
 
     <LinearLayout
@@ -20,8 +21,9 @@
             android:layout_marginTop="15dp"
             android:src="@drawable/ic_person_black"
             app:c_border="true"
-            app:c_border_color="@color/colorGray"
-            app:c_border_width="1dp" />
+            app:c_background_color="@color/backgroundFragment"
+            app:c_border_color="@color/shapeRectangle"
+            app:c_border_width="2dp" />
 
         <!--Table for other data-->
         <TableLayout
@@ -35,12 +37,13 @@
                     android:id="@+id/bioTv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:layout_span="3"
                     android:gravity="top"
                     android:padding="10dp"
                     android:text="The bio info"
                     android:textAlignment="center"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
@@ -50,7 +53,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Name"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/nameTv"
@@ -59,7 +62,7 @@
                     android:inputType="text"
                     android:padding="5dp"
                     android:text="User Name"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
@@ -69,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Phone"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/phoneTv"
@@ -77,11 +80,20 @@
                     android:layout_height="wrap_content"
                     android:autoLink="phone"
                     android:inputType="phone"
+                    android:textColorLink="@color/colorWhite"
                     android:padding="5dp"
                     android:text="User Phone"
-                    android:textColor="@color/colorBlack" />
-            </TableRow>
+                    android:textColor="@color/colorWhite" />
 
+                <ImageView
+                    android:id="@+id/main_item_contact"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="-100dp"
+                    android:clickable="true"
+                    android:scaleType="center"
+                    android:src="@drawable/ic_call" />
+            </TableRow>
 
             <TableRow>
 
@@ -90,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Email"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/emailTv"
@@ -98,9 +110,10 @@
                     android:layout_height="wrap_content"
                     android:autoLink="email"
                     android:inputType="textEmailAddress"
+                    android:textColorLink="@color/colorWhite"
                     android:padding="5dp"
                     android:text="User email"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
@@ -110,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="DOB"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/dobTv"
@@ -118,7 +131,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="User DOB"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
@@ -128,7 +141,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Date Added"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/addedDateTv"
@@ -136,7 +149,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Time of Added"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
@@ -146,7 +159,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Date Updated"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
 
                 <TextView
                     android:id="@+id/updatedDateTv"
@@ -154,18 +167,18 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Time of Updated"
-                    android:textColor="@color/colorBlack" />
+                    android:textColor="@color/colorWhite" />
             </TableRow>
 
-            <ImageView
-                android:id="@+id/main_item_contact"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+       <!--     <ImageView
+                android:id="@+id/main_item_contactxx"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
                 android:clickable="true"
                 android:scaleType="center"
                 android:src="@drawable/icon_call_contact" />
-
+-->
         </TableLayout>
     </LinearLayout>
 

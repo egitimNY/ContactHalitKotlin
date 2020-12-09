@@ -118,6 +118,8 @@ class AddUpdateRecordActivity : AppCompatActivity() {
 
         saveBtn.setOnClickListener {
             inputData();
+            val intent = Intent(this@AddUpdateRecordActivity, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

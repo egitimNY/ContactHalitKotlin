@@ -64,8 +64,8 @@ class AdapterRecord(val makeACall: (number: String) -> Unit): RecyclerView.Adapt
         // set data to views
         holder.nameIv.text = name
         holder.phoneTv.text = phone
-        holder.emailTv.text = email
-        holder.dobTv.text = dob
+//        holder.emailTv.text = email
+//        holder.dobTv.text = dob
         // if user dosn't attach image then imageUri will be null, so set default image in that case
         if (image == "null"){
             // no image in record, set default
@@ -161,8 +161,8 @@ class AdapterRecord(val makeACall: (number: String) -> Unit): RecyclerView.Adapt
         var profileIv:ImageView = itemView.findViewById(R.id.profileIv)
         var nameIv:TextView = itemView.findViewById(R.id.nameTv)
         var phoneTv:TextView = itemView.findViewById(R.id.phoneTv)
-        var emailTv:TextView = itemView.findViewById(R.id.emailTv)
-        var dobTv:TextView = itemView.findViewById(R.id.dobTv)
+//        var emailTv:TextView = itemView.findViewById(R.id.emailTv)
+//        var dobTv:TextView = itemView.findViewById(R.id.dobTv)
         var morebtn:ImageButton = itemView.findViewById(R.id.moreBtn)
 
         var main_item_contact: ImageView = itemView.findViewById(R.id.main_item_contact)
