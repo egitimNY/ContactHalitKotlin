@@ -87,11 +87,11 @@
 
         <ImageView
             android:id="@+id/main_item_contact"
-            android:layout_width="27dp"
-            android:layout_height="27dp"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="41dp"
+            android:layout_marginRight="1dp"
+            android:layout_marginTop="36dp"
             android:src="@drawable/ic_call"
             android:background="@color/backgroundFragment"
             android:layout_alignParentRight="true" />

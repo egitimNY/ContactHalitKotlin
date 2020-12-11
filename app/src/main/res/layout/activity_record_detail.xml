@@ -53,6 +53,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Name"
+                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -62,6 +63,7 @@
                     android:inputType="text"
                     android:padding="5dp"
                     android:text="User Name"
+                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
             </TableRow>
 
@@ -72,6 +74,7 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Phone"
+                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -80,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:autoLink="phone"
                     android:inputType="phone"
+                    android:textSize="20sp"
                     android:textColorLink="@color/colorWhite"
                     android:padding="5dp"
                     android:text="User Phone"
@@ -87,11 +91,10 @@
 
                 <ImageView
                     android:id="@+id/main_item_contact"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginRight="-100dp"
+                    android:paddingTop="6dp"
                     android:clickable="true"
-                    android:scaleType="center"
                     android:src="@drawable/ic_call" />
             </TableRow>
 
