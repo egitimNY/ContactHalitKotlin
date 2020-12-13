@@ -53,7 +53,6 @@
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Name"
-                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -63,18 +62,16 @@
                     android:inputType="text"
                     android:padding="5dp"
                     android:text="User Name"
-                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
             </TableRow>
 
             <TableRow>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
                     android:text="Phone"
-                    android:textSize="20sp"
                     android:textColor="@color/colorWhite" />
 
                 <TextView
@@ -83,40 +80,26 @@
                     android:layout_height="wrap_content"
                     android:autoLink="phone"
                     android:inputType="phone"
-                    android:textSize="20sp"
                     android:textColorLink="@color/colorWhite"
                     android:padding="5dp"
                     android:text="User Phone"
                     android:textColor="@color/colorWhite" />
 
                 <ImageView
-                    android:id="@+id/main_item_contact"
+                    android:id="@+id/main_item_detail_sms"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingTop="6dp"
                     android:clickable="true"
-                    android:src="@drawable/ic_call" />
-            </TableRow>
+                    android:src="@drawable/ic_message" />
 
-            <TableRow>
-
-                <TextView
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:id="@+id/main_item_contact"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="5dp"
-                    android:text="Email"
-                    android:textColor="@color/colorWhite" />
-
-                <TextView
-                    android:id="@+id/emailTv"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoLink="email"
-                    android:inputType="textEmailAddress"
-                    android:textColorLink="@color/colorWhite"
-                    android:padding="5dp"
-                    android:text="User email"
-                    android:textColor="@color/colorWhite" />
+                    android:paddingTop="6dp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_call" />>
             </TableRow>
 
             <TableRow>
@@ -135,6 +118,33 @@
                     android:padding="5dp"
                     android:text="User DOB"
                     android:textColor="@color/colorWhite" />
+            </TableRow>
+
+            <TableRow>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:text="Email"
+                    android:textColor="@color/colorWhite" />
+
+                <TextView
+                    android:id="@+id/emailTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    android:textColorLink="@color/colorWhite"
+                    android:padding="5dp"
+                    android:text="User email"
+                    android:textColor="@color/colorWhite" />
+
+                <ImageView
+                    android:id="@+id/main_item_detail_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:src="@drawable/ic_email" />
             </TableRow>
 
             <TableRow>
