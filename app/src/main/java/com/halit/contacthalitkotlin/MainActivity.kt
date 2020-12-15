@@ -8,13 +8,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.opencsv.CSVReader
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.File
+import java.io.FileReader
+import java.io.FileWriter
 
 /**
  * This class is responsible for displaying all the available records in the DB, and
@@ -36,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
     private var recentSortOrder = NEWEST_FIRST
 
+    //----for permission----
+    private val STORAGE_REQUEST_CODE_EXPORT = 1
+    private val STORAGE_REQUEST_CODE_IMPORT = 2
+    private lateinit var storagePermission: Array<String>
+
     //reference variable of adapter to display a list of values in the recycler view
     lateinit var  adapterRecord:AdapterRecord
     //A variable to hold the phone number until user grants the permission to make a call
@@ -44,6 +55,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // init array of permission
+        storagePermission = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
         // init dbHelper
         dbHelper = MyDbHelper(this)
@@ -62,6 +76,127 @@ class MainActivity : AppCompatActivity() {
         if (ifShowDialog) {
             showDialog()
         }
+    }
+
+    private fun checkStoragePermission(): Boolean {
+        // check if the storage permission is allowed or not and return result as true (allowed) / false (not allowed)
+        return ContextCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) == (PackageManager.PERMISSION_GRANTED)
+    }
+
+    private fun requestStoragePermissionImport() {
+        // request storage permission for import
+        ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE_IMPORT)
+    }
+
+    private fun requestStoragePermissionExport() {
+        // request storage permission for export
+        ActivityCompat.requestPermissions(this, storagePermission, STORAGE_REQUEST_CODE_EXPORT)
+    }
+
+    fun exportCSV() {
+        // path of csv file
+
+        val folder =
+//          File(Environment.getExternalStorageDirectory().toString() +"/"+ "SQLiteBackupKotlin")
+            File("${Environment.getExternalStorageDirectory()}/SQLiteBackupKotlin")
+
+        var isFolderCreated = false
+        if (!folder.exists()) isFolderCreated = folder.mkdir()
+
+        // file name
+        val csvFileName = "SQLite_Backup.csv"
+
+        // file name and path
+        val fileNameAndPath = "$folder/$csvFileName"
+
+        // get records to save in backup
+        var recordList = ArrayList<ModelRecord>()
+        recordList.clear()
+        recordList = dbHelper.getAllRecords(OLDEST_FIRST)
+
+        try {
+            val fw = FileWriter(fileNameAndPath)
+            for (i in recordList.indices) {
+                fw.append("" + recordList[i].id) // id
+                fw.append(",")
+                fw.append("" + recordList[i].name) // name
+                fw.append(",")
+                fw.append("" + recordList[i].image) // image
+                fw.append(",")
+                fw.append("" + recordList[i].bio) // bio
+                fw.append(",")
+                fw.append("" + recordList[i].phone) // phone
+                fw.append(",")
+                fw.append("" + recordList[i].email) // email
+                fw.append(",")
+                fw.append("" + recordList[i].dob) // dob
+                fw.append(",")
+                fw.append("" + recordList[i].addedTime) // added time
+                fw.append(",")
+                fw.append("" + recordList[i].updatedTime) // updated time
+                fw.append("\n")
+            }
+            fw.flush()
+            fw.close()
+
+
+            Toast.makeText(this, "Backup Exported to $fileNameAndPath...", Toast.LENGTH_LONG).show()
+
+        } catch (e: Exception) {
+
+            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun importCSV() {
+        // complete path of csv
+        val filePathAndName =
+            "${Environment.getExternalStorageDirectory()}/SQLiteBackupKotlin/SQLite_Backup.csv"
+
+        val csfFile = File(filePathAndName)
+
+        // check if backup file exist or not
+        if (csfFile.exists()) {
+            // exists
+            try {
+                val csvReader = CSVReader(FileReader(csfFile.absolutePath))
+                var nextLine: Array<String>
+                while (csvReader.readNext().also { nextLine = it } != null) {
+                    // get record from csv
+                    val idd = nextLine[0]
+                    val name = nextLine[1]
+                    val image = nextLine[2]
+                    val bio = nextLine[3]
+                    val phone = nextLine[4]
+                    val email = nextLine[5]
+                    val dob = nextLine[6]
+                    val addedTime = nextLine[7]
+                    val updatedTime = nextLine[8]
+
+                    // add to db
+                    val timestamp = System.currentTimeMillis()
+                    val id = dbHelper.inserRecord(
+                        "" + name,
+                        "" + image,
+                        "" + bio,
+                        "" + phone,
+                        "" + email,
+                        "" + dob,
+                        "$timestamp",
+                        "$timestamp"
+                    )
+                }
+            } catch (e: Exception) {
+                Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            }
+
+        } else {
+            Toast.makeText(this, "Backup not found", Toast.LENGTH_LONG).show()
+        }
+
     }
 
 
@@ -244,6 +379,29 @@ class MainActivity : AppCompatActivity() {
                 })
                 .create()
             alertDialog.show()
+        }else if (id == R.id.action_backup) {
+            // backup all records
+            if (checkStoragePermission()) {
+                // permission allowed, do backup
+                exportCSV()
+            } else {
+                // permission not allowed, request
+                requestStoragePermissionExport()
+            }
+
+        } else if (id == R.id.action_restore) {
+            // restore all records
+            if (checkStoragePermission()) {
+                // permission allowed, do restore
+                importCSV()
+                onResume()
+
+            } else {
+                // permission not allowed, request
+                requestStoragePermissionImport()
+
+            }
+
         }
         return super.onOptionsItemSelected(item)
     }
@@ -261,6 +419,27 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+
+        when (requestCode) {
+            STORAGE_REQUEST_CODE_EXPORT -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission allowed
+                    exportCSV()
+                } else {
+                    // permission denied
+                    Toast.makeText(this, "Permission denied...", Toast.LENGTH_LONG).show()
+                }
+            }
+            STORAGE_REQUEST_CODE_IMPORT -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission allowed
+                } else {
+                    // permission denied
+                    Toast.makeText(this, "Permission denied...", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
     }
 
 }

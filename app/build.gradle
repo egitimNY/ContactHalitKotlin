@@ -40,4 +40,6 @@ dependencies {
 
     implementation 'com.github.mohammadatif:CircularImageView:1.0.0'
 
+    implementation 'com.opencsv:opencsv:4.6'
+
 }
