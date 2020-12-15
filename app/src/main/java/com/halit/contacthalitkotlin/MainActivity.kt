@@ -270,7 +270,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(Intent(Intent.ACTION_SENDTO).apply {
             type = "vnd.android-dir/mms-sms"
             data = Uri.parse("sms:$phone")
-            putExtra("sms_body", "dummy body")
+            putExtra("", "")
         })
     }
 
