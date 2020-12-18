@@ -33,7 +33,7 @@ class RecordDetailActivity : AppCompatActivity() {
 
         // setting up actionBar
         actionBar = supportActionBar
-        actionBar!!.title = "Record Detail"
+        actionBar!!.title = "Detail"
         actionBar!!.setDisplayShowHomeEnabled(true)
         actionBar!!.setDefaultDisplayHomeAsUpEnabled(true)
 

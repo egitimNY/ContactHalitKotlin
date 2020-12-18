@@ -66,7 +66,7 @@ class AddUpdateRecordActivity : AppCompatActivity() {
         isEditMode = intent.getBooleanExtra("isEditMode", false)
         if (isEditMode){
             // editing data, came here from adapter
-            actionBar!!.title = "Update Record"
+            actionBar!!.title = "Update"
 
             id = intent.getStringExtra("ID")
             name = intent.getStringExtra("NAME")

@@ -9,5 +9,6 @@
     <color name="colorGray1">#C0B6B6</color>
 
     <color name="backgroundFragment">#2b2b2b</color>
+    <color name="background">#EEEDEF</color>
     <color name="shapeRectangle">#3B3F47</color>
 </resources>
