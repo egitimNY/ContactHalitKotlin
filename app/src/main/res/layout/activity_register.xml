@@ -1,94 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="30dp"
     android:background="@color/background"
-    android:orientation="vertical"
     android:gravity="center"
     tools:context=".loginregister.RegisterActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:layout_marginTop="-30dp"
-        android:focusableInTouchMode="true">
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="40dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Sign In"
+            android:textColor="@color/colorAccent"
+            android:textSize="25sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/register_login_background"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorAccent"
             android:hint="User Name"
-            android:ems="10"
             android:inputType="text"
-            android:textSize="20sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingLeft="16dp" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:layout_marginTop="10dp"
-        android:focusableInTouchMode="true">
-
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/password"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_login_background"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorAccent"
             android:hint="Password"
-            android:ems="10"
             android:inputType="textPassword"
-            android:textSize="20sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:layout_marginTop="5dp">
+            android:paddingLeft="16dp" />
 
         <EditText
             android:id="@+id/repassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/register_login_background"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="10dp"
+            android:drawableTint="@color/colorAccent"
             android:hint="Confirm Password"
-            android:ems="10"
             android:inputType="textPassword"
-            android:textSize="20sp"/>
-    </com.google.android.material.textfield.TextInputLayout>
+            android:paddingLeft="16dp" />
 
-    <Button
-        android:id="@+id/btnsignup"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:textSize="22sp"
-        android:textColor="#ffffff"
-        android:layout_marginTop="50dp"
-        android:background="@drawable/button_rounded" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnsignup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/button_rounded"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="22sp" />
 
-    <Button
-        android:id="@+id/btnSignin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Existing user! Go to Sign in page"
-        android:textSize="18sp"
-        android:textColor="#ffffff"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/button_rounded" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal">
 
-    <!--<TextView
-        android:id="@+id/btnForgot"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:layout_marginTop="50dp"
-        android:layout_below="@id/btnSignin"
-        android:gravity="center"
-        android:text="Fogot Password"/>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Existing User! Go to"
+                android:textColor="@color/colorAccent" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/btnSignin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:text="Signin"
+                android:textColor="@color/purple"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,7 +17,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     EditText username, password, repassword;
 //    TextView forgot;
-    Button signup, signin;
+    Button signup;
+    TextView signin;
     DBHelper DB;
 
     @Override
@@ -24,11 +26,11 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        repassword = (EditText) findViewById(R.id.repassword);
-        signup = (Button) findViewById(R.id.btnsignup);
-        signin = (Button) findViewById(R.id.btnSignin);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        repassword = findViewById(R.id.repassword);
+        signup = findViewById(R.id.btnsignup);
+        signin = findViewById(R.id.btnSignin);
 //        forgot = findViewById(R.id.btnForgot);
 
 

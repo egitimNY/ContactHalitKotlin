@@ -16,8 +16,8 @@ import com.halit.contacthalitkotlin.R;
 public class LoginActivity extends AppCompatActivity {
 
     EditText username, password;
-    Button btnlogin,registerBtn;
-    TextView forgot;
+    Button btnlogin;
+    TextView forgot,registerBtn;
     DBHelper DB;
 
     @Override
