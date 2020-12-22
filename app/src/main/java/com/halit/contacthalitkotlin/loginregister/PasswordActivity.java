@@ -42,6 +42,7 @@ public class PasswordActivity extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ResetActivity.class);
                     intent.putExtra("username", user);
                     startActivity(intent);
+                    finish();
                     
                 }else {
 

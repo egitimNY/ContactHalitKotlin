@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ContactHalitKotlin</string>
+    <string name="main_back_end">Press again to exit</string>
 </resources>
