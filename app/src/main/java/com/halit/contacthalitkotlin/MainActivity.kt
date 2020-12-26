@@ -230,6 +230,26 @@ class MainActivity : AppCompatActivity() {
         alertDialog.show()
     }
 
+    private fun showDialogRestore() {
+        val alertDialogBuilder =
+            androidx.appcompat.app.AlertDialog.Builder(this@MainActivity)
+        alertDialogBuilder
+            .setTitle("Under Construction")
+            .setMessage("Restore option is not available yet. we will update this feature later")
+            .setPositiveButton(
+                "OK"
+            ) { dialog, which ->
+
+                dialog.dismiss();
+//                finish()
+               /* val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)*/
+            }
+        val alertDialog = alertDialogBuilder.create()
+        alertDialog.setCanceledOnTouchOutside(false)
+        alertDialog.show()
+    }
+
     private fun loadRecords(orderBy:String) {
         recentSortOrder = orderBy
         adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy)) { type: AdapterRecord.Action ,data: String ->
@@ -398,6 +418,9 @@ class MainActivity : AppCompatActivity() {
             if (checkStoragePermission()) {
                 // permission allowed, do restore
                 importCSV()
+//                showDialogRestore()
+//                Toast.makeText(this@MainActivity, "Restore Option Not Available Yet", Toast.LENGTH_SHORT).show()
+
                 onResume()
 
             } else {

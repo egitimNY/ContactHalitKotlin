@@ -14,14 +14,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".loginregister.ResetActivity" android:label="Reset"></activity>
-        <activity android:name=".loginregister.PasswordActivity" android:label="Forgot Password"/>
-        <activity android:name=".loginregister.RegisterActivity" android:label="Register"/>
-        <activity android:name=".MainActivity" android:label="Contact Phone List"/>
-        <activity android:name=".BigImageActivity" android:label="Big Image"/>
-        <activity android:name=".AddUpdateRecordActivity" android:label="Update"/>
-        <activity android:name=".RecordDetailActivity" android:label="Detail"/>
-        <activity android:name=".loginregister.LoginActivity" android:label="Login">
+
+        <activity
+            android:name=".loginregister.ResetActivity"
+            android:label="Reset" />
+        <activity
+            android:name=".loginregister.PasswordActivity"
+            android:label="Forgot Password" />
+        <activity
+            android:name=".loginregister.RegisterActivity"
+            android:label="Register" />
+        <activity
+            android:name=".MainActivity"
+            android:label="Contact Phone List" />
+        <activity
+            android:name=".BigImageActivity"
+            android:label="Big Image" />
+        <activity
+            android:name=".AddUpdateRecordActivity"
+            android:label="Update" />
+        <activity
+            android:name=".RecordDetailActivity"
+            android:label="Detail" />
+        <activity
+            android:name=".loginregister.LoginActivity"
+            android:label="Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
