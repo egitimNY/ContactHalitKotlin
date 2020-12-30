@@ -22,13 +22,13 @@
         android:id="@+id/action_backup"
         android:title="Backup" />
 
-    <item
+   <!-- <item
         android:id="@+id/action_restore"
-        android:title="Restore" />
+        android:title="Restore" />-->
 
-  <!--  <item
+    <item
         android:id="@+id/action_restore_not_available"
-        android:title="Restore is not activate!" />-->
+        android:title="Restore is not activate!" />
 
     <item android:id="@+id/action_logout"
         android:title="Logout"/>

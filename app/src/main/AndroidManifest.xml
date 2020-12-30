@@ -26,10 +26,10 @@
             android:label="Register" />
         <activity
             android:name=".MainActivity"
-            android:label="Contact Phone List" />
+            android:label="Private Contacts / Phone Book" />
         <activity
             android:name=".BigImageActivity"
-            android:label="Big Image" />
+            android:label="Image" />
         <activity
             android:name=".AddUpdateRecordActivity"
             android:label="Update" />
@@ -38,7 +38,7 @@
             android:label="Detail" />
         <activity
             android:name=".loginregister.LoginActivity"
-            android:label="Login">
+            android:label="Private Contacts">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

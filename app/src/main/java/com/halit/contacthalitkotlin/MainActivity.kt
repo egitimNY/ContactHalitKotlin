@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.halit.contacthalitkotlin.loginregister.LoginActivity
 import com.opencsv.CSVReader
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
@@ -44,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     private var recentSortOrder = NEWEST_FIRST
 
     //----for permission----
-    private val STORAGE_REQUEST_CODE_EXPORT = 1
-    private val STORAGE_REQUEST_CODE_IMPORT = 2
+    private val STORAGE_REQUEST_CODE_EXPORT = 2
+    private val STORAGE_REQUEST_CODE_IMPORT = 3
     private lateinit var storagePermission: Array<String>
 
     //reference variable of adapter to display a list of values in the recycler view
@@ -53,12 +54,17 @@ class MainActivity : AppCompatActivity() {
     //A variable to hold the phone number until user grants the permission to make a call
     private var number: String = ""
     private lateinit var sharedPreferences: SharedPreferences
+    private var loggedInUser: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE)
         sharedPreferences.edit().putBoolean("loggedIn",true).apply()
+        loggedInUser = sharedPreferences.getString("userName","") ?: ""
+        if(loggedInUser.isNullOrEmpty()) {
+            finish()
+        }
 
         // init array of permission
         storagePermission = arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -111,7 +117,7 @@ class MainActivity : AppCompatActivity() {
         if (!folder.exists()) isFolderCreated = folder.mkdir()
 
         // file name
-        val csvFileName = "SQLite_Backup.csv"
+        val csvFileName = "SQLite_Backup_$loggedInUser.csv"
 
         // file name and path
         val fileNameAndPath = "$folder/$csvFileName"
@@ -119,7 +125,7 @@ class MainActivity : AppCompatActivity() {
         // get records to save in backup
         var recordList = ArrayList<ModelRecord>()
         recordList.clear()
-        recordList = dbHelper.getAllRecords(OLDEST_FIRST)
+        recordList = dbHelper.getAllRecords(OLDEST_FIRST, loggedInUser)
 
         try {
             val fw = FileWriter(fileNameAndPath)
@@ -158,7 +164,7 @@ class MainActivity : AppCompatActivity() {
     fun importCSV() {
         // complete path of csv
         val filePathAndName =
-            "${Environment.getExternalStorageDirectory()}/SQLiteBackupKotlin/SQLite_Backup.csv"
+            "${Environment.getExternalStorageDirectory()}/SQLiteBackupKotlin/SQLite_Backup_$loggedInUser.csv"
 
         val csfFile = File(filePathAndName)
 
@@ -182,7 +188,7 @@ class MainActivity : AppCompatActivity() {
 
                     // add to db
                     val timestamp = System.currentTimeMillis()
-                    val id = dbHelper.inserRecord(
+                    val id = dbHelper.insertRecord(
                         "" + name,
                         "" + image,
                         "" + bio,
@@ -190,7 +196,8 @@ class MainActivity : AppCompatActivity() {
                         "" + email,
                         "" + dob,
                         "$timestamp",
-                        "$timestamp"
+                        "$timestamp",
+                        "$loggedInUser"
                     )
                 }
             } catch (e: Exception) {
@@ -209,7 +216,7 @@ class MainActivity : AppCompatActivity() {
             androidx.appcompat.app.AlertDialog.Builder(this@MainActivity)
         alertDialogBuilder
             .setTitle("Disclaimer")
-            .setMessage("The information provided in app though is compiled with utmost care,the app can not guarantee that this information is and stays 100% accurate. We therefore reserve all right of app and accept no liability for any kind of damage directly or indirectly that can come from the use or not able to use the information and functionality provided by app.")
+            .setMessage("The information provided in app though is compiled with utmost care,the app can not guarantee that this information is and stays 100% accurate. We therefore reserve all right of app and accept no liability for any kind of damage directly or indirectly that can come from the use or not able the information and functionality provided by app.")
             .setPositiveButton(
                 "I Don't Accept"
             ) { dialog, which ->
@@ -252,7 +259,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun loadRecords(orderBy:String) {
         recentSortOrder = orderBy
-        adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy)) { type: AdapterRecord.Action ,data: String ->
+        adapterRecord = AdapterRecord(this, dbHelper.getAllRecords(orderBy, loggedInUser)) { type: AdapterRecord.Action ,data: String ->
             handleAction(type, data)
         }
 
@@ -260,7 +267,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchRecords(query:String) {
-        adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query)) { type: AdapterRecord.Action ,data: String ->
+        adapterRecord = AdapterRecord(this, dbHelper.searchRecords(query, loggedInUser)) { type: AdapterRecord.Action ,data: String ->
             handleAction(type, data)
         }
 
@@ -413,13 +420,13 @@ class MainActivity : AppCompatActivity() {
                 requestStoragePermissionExport()
             }
 
-        } else if (id == R.id.action_restore) {
+        } else if (id == R.id.action_restore_not_available) {
             // restore all records
             if (checkStoragePermission()) {
                 // permission allowed, do restore
-                importCSV()
-//                showDialogRestore()
-//                Toast.makeText(this@MainActivity, "Restore Option Not Available Yet", Toast.LENGTH_SHORT).show()
+//                importCSV()
+                showDialogRestore()
+                Toast.makeText(this@MainActivity, "Restore Option Not Available Yet", Toast.LENGTH_SHORT).show()
 
                 onResume()
 
@@ -431,6 +438,8 @@ class MainActivity : AppCompatActivity() {
 
         }else if(id == R.id.action_logout){
             sharedPreferences.edit().putBoolean("loggedIn",false).apply()
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
             finish()
 
         }
@@ -465,6 +474,7 @@ class MainActivity : AppCompatActivity() {
             STORAGE_REQUEST_CODE_IMPORT -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission allowed
+//                    importCSV()
                 } else {
                     // permission denied
                     Toast.makeText(this, "Permission denied...", Toast.LENGTH_LONG).show()
